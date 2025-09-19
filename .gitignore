@@ -1,0 +1,6 @@
+.history/
+config/
+data/
+
+.env
+PROJECT_STRUCTURE.md
