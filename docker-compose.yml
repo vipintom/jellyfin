@@ -5,6 +5,9 @@ services:
     user: "${UID}:${GID}"
     networks:
       - caddy-shared-network
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     volumes:
       - ./config/jellyfin:/config
       - ./data/media:/media
@@ -64,12 +67,30 @@ services:
       - WEBUI_PORT=8080
     networks:
       - caddy-shared-network
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     volumes:
       - ./config/qbittorrent:/config
       - ./data/torrents:/downloads
     ports:
       - "6881:6881"
       - "6881:6881/udp"
+    restart: unless-stopped
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+      - PUID=${UID}
+      - PGID=${GID}
+      - TZ=Etc/UTC
+    ports:
+      - "5055:5055"
+    networks:
+      - caddy-shared-network
+    volumes:
+      - ./config/jellyseerr:/config
     restart: unless-stopped
 
 networks:

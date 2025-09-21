@@ -4,3 +4,6 @@ data/
 
 .env
 PROJECT_STRUCTURE.md
+data
+.reposcribe.config.js
+Caddyfile
